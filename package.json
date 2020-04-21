@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "ajv": "^6.12.1",
+    "tslint-config-airbnb": "^5.11.2"
+  },
+  "devDependencies": {
+    "@types/node": "^13.11.1"
+  }
+}
