@@ -6,8 +6,9 @@ var isValidJSON = function (data) {
         return "The length of the Object is " + String(data).length;
     }
     try {
-        var _data = JSON.parse(data);
-        if (_data && typeof _data === "object" && !(_data instanceof Array)) {
+        var _data_1 = JSON.parse(data);
+        var _dataJson_1 = JSON.parse(dataJson);
+        if (_data_1 && typeof _data_1 === "object" && (_data_1 instanceof Array)) {
             // To Do: Call the functions to return data.json
             // Convert Degress to Radians
             var degToRads_1 = function (deg) {
@@ -25,29 +26,28 @@ var isValidJSON = function (data) {
                 var dx = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2);
                 var dy = (lat2 - lat1);
                 var distance = Math.sqrt(dx * dx + dy * dy) * earthRadius;
-                console.log('distance', distance);
+                // console.log('distance', distance);
                 return distance;
             };
-            var nearestGeo_1 = function (latitude, longitude) {
+            var nearestGeo = function (latitude, longitude) {
                 var mindif = 99999;
                 var closest = 0;
-                geoJson.forEach(function (elem, index) {
+                _data_1.forEach(function (elem, index) {
                     var tesdata = splitGeo_1(elem.geo);
                     var dif = eucledianDistance_1(latitude, longitude, +tesdata[0], +tesdata[1]);
-                    console.log('diff', dif);
+                    // console.log('diff', dif);
                     if (dif < mindif) {
                         closest = index;
                         mindif = dif;
                     }
                 });
-                var closestLocation = (geoJson[closest]);
-                console.table(dataJson);
-                return closestLocation;
+                var closestLocation = (_data_1[closest]);
+                console.table(_data_1); //return geoJSON
+                console.table(_dataJson_1);
+                return _dataJson_1;
             };
-            geoJson.forEach(function (element, index) {
-                nearestGeo_1(10, 40); // Testing Data
-            });
-            return "Parsed the JSON file:";
+            nearestGeo(10, 40); // Testing Data
+            return _dataJson_1;
         }
     }
     catch (e) {
